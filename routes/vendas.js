@@ -4,6 +4,9 @@ const VendasController = require("../controllers/vendas-controllers.js");
 const login = require("../middlewares/login");
 const uploadComprovantes = require("../middlewares/upload_comprovantes");
 
+//------ retorna todos os pedidos -------------
+router.get('/listar_lojas', VendasController.getLojas) ;
+
 //---------- salvar anexos ---------
 router.post(
   "/anexararquivos/:id_venda", uploadComprovantes.single("comprovante"), VendasController.salvarAnexosVendas

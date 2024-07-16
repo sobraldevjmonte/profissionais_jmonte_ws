@@ -1,5 +1,20 @@
 const pg = require("../conexao");
 
+//------ retorna todos as cores -------------
+exports.getLojas = async(req, res) => {
+  try {
+      const result = await pg.execute("SELECT * FROM lojas");
+      const response = {
+          quantidade: result.rows.length,
+          lojas: result.rows,
+      };
+      console.log("------- RETORNA CORES----------");
+      res.status(200).send(response);
+  } catch (error) {
+      return res.status(500).send({ error: error, mensagem: "Erro ao procurar" });
+  }
+};
+
 //------- FINALIZAR PEDIDO ----------
 exports.finalizarPedidoParceiroJMonte = async (req, res) => {
   const dados = req.body;
