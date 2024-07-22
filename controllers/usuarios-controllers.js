@@ -201,6 +201,7 @@ exports.salvarUsuario = async(req, res) => {
             res.status(201).send(response);
         }
     } catch (error) {
+        console.log(error.message);
         return res.status(500).send({
             error: error,
             msg: "Não foi possível salvar!",

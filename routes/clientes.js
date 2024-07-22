@@ -6,6 +6,7 @@ const ClientesController = require('../controllers/clientes_controllers');
 
 //-------- retorna os clientes do usuario ---------
 router.get('/:id_usuario', ClientesController.getTodosClientes);
+router.get('/buscar/:cpf', ClientesController.buscarCliente);
 
 //--------salvar cliente ---------
 router.post('/', ClientesController.salvarCliente);

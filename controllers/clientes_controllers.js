@@ -1,6 +1,21 @@
 const { Console } = require("console");
 const pg = require("../conexao");
 
+exports.buscarCliente = async(req, res) => {
+    const cpf = req.params.cpf;
+    try {
+        const result = await pg.execute(
+            "SELECT * FROM vw_dindicadores vd WHERE vd.cpf=$1 limit 1", [cpf]
+        );
+        const response = {
+            profissional: result.rows,
+        };
+        console.log("------- LISTA TODOS OS CLIENTES ---------");
+        res.status(200).send(response);
+    } catch (error) {
+        return res.status(500).send({ error: error, mensagem: "Erro ao procurar" });
+    }
+};
 exports.salvarCliente = async(req, res) => {
     const { id_usuario, nome_cliente, id_loja } = req.body;
     console.log(req.body);
