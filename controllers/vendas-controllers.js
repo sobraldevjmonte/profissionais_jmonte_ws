@@ -21,6 +21,7 @@ exports.finalizarPedidoParceiroJMonte = async (req, res) => {
   let numeronp = dados.numeronp;
   let lojaselecionada = dados.lojaselecionada;
   let id_usuario = dados.id_usuario;
+  let comprovante_nome = dados.imagem;
 
   console.log(dados);
 
@@ -40,7 +41,7 @@ exports.finalizarPedidoParceiroJMonte = async (req, res) => {
   let data_lancamento = currentTime;
 
   let result = await pg.execute(
-    "INSERT INTO vendas (id_usuario, numero_venda, data_venda, data_lancamento,  status, aberto ,total_pontos, id_loja) VALUES ($1, $2 ,$3, $4 , $5, $6, $7, $8) RETURNING *",
+    "INSERT INTO vendas (id_usuario, numero_venda, data_venda, data_lancamento,  status, aberto ,total_pontos, id_loja, imagem) VALUES ($1, $2 ,$3, $4 , $5, $6, $7, $8, $9) RETURNING *",
     [
       +id_usuario,
       +numeronp,
@@ -50,6 +51,7 @@ exports.finalizarPedidoParceiroJMonte = async (req, res) => {
       `${aberto}`,
       0,
       lojaselecionada,
+      comprovante_nome
     ]
   );
   console.log("************ linha 40 **********************");
