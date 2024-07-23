@@ -208,7 +208,6 @@ exports.deletarVenda = async (req, res) => {
 };
 
 
-
 //------------ SALVA ANEXO -------------
 exports.salvarAnexosVendas = async (req, res) => {
   let id_venda = req.params.id_venda;
