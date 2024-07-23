@@ -8,9 +8,7 @@ const uploadComprovantes = require("../middlewares/upload_comprovantes");
 router.get('/listar_lojas', VendasController.getLojas) ;
 
 //---------- salvar anexos ---------
-router.post(
-  "/anexararquivos/:id_venda", uploadComprovantes.single("comprovante"), VendasController.salvarAnexosVendas
-);
+router.post("/anexararquivos/:id_venda", uploadComprovantes.single("comprovante"), VendasController.salvarAnexosVendas);
 
 router.delete("/deletaranexo/:id_anexo", VendasController.deletarComprovante);
 router.delete("/deletarvenda/:id_venda", VendasController.deletarVenda);

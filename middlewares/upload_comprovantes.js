@@ -6,8 +6,8 @@ module.exports = multer({
         
         destination: (req, file, cb) => {
             cb(null, "../../profissionais_jmonte/profissionais_jmonte_web/static/anexos");
-			cb(null, "../../api_jportal_react/web/public/anexos");
-          
+			cb(null, "../../../../../../projetos_react/jporta2024git/jportal-web/public/anexos");
+
         },
         filename: (req, file, cb) => {
             cb(null, file.originalname);

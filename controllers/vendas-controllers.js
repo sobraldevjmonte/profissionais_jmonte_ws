@@ -210,6 +210,8 @@ exports.deletarVenda = async (req, res) => {
 
 //------------ SALVA ANEXO -------------
 exports.salvarAnexosVendas = async (req, res) => {
+  console.log(req)
+  console.log("---------------- salvarAnexosVendas --------------------")
   let id_venda = req.params.id_venda;
   let link_anexo = req.file.filename;
 
