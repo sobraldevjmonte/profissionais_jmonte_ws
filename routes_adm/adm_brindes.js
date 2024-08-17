@@ -28,8 +28,8 @@ router.post("/solIcitarBrinde", AdmBrindesController.solicitarBrinde);
 router.get("/listar-pedidos-brindes", AdmBrindesController.lirtarPedidosBrindes);
 
 
-router.post("/rejeitar-pedido/:id_pedido/:id_parceiro", AdmBrindesController.rejeitaPedido);
 router.post("/aprovar-pedido/:id_pedido/:id_autorizador", AdmBrindesController.aprovarPedido);
+router.post("/rejeitar-pedido/:id_pedido/:id_parceiro", AdmBrindesController.rejeitaPedido);
 router.post("/entregar-pedido/:id_pedido/:id_premio/:id_entregador", AdmBrindesController.entregarPedido);
 
 module.exports = router;
