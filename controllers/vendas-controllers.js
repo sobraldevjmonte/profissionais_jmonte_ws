@@ -1,17 +1,17 @@
 const pg = require("../conexao");
 
 //------ retorna todos as cores -------------
-exports.getLojas = async(req, res) => {
+exports.getLojas = async (req, res) => {
   try {
-      const result = await pg.execute("SELECT * FROM lojas");
-      const response = {
-          quantidade: result.rows.length,
-          lojas: result.rows,
-      };
-      console.log("------- RETORNA CORES----------");
-      res.status(200).send(response);
+    const result = await pg.execute("SELECT * FROM lojas");
+    const response = {
+      quantidade: result.rows.length,
+      lojas: result.rows,
+    };
+    console.log("------- RETORNA CORES----------");
+    res.status(200).send(response);
   } catch (error) {
-      return res.status(500).send({ error: error, mensagem: "Erro ao procurar" });
+    return res.status(500).send({ error: error, mensagem: "Erro ao procurar" });
   }
 };
 
@@ -51,7 +51,7 @@ exports.finalizarPedidoParceiroJMonte = async (req, res) => {
       `${aberto}`,
       0,
       lojaselecionada,
-      comprovante_nome
+      comprovante_nome,
     ]
   );
   console.log("************ linha 40 **********************");
@@ -85,12 +85,12 @@ exports.finalizarPedido = async (req, res) => {
 
 exports.listarPedidoUsuario = async (req, res) => {
   let id_usuario = req.params.id_usuario;
-console.log(id_usuario);
+  console.log(id_usuario);
   let sqlListaPedidosUsuario =
     "SELECT v.id_vendas,v.data_venda, v.numero_venda, v.total_pontos, v.status, l.descricao_loja " +
     "FROM vendas v, lojas l WHERE v.id_loja = l.id_loja_venda " +
     "AND v.id_usuario = $1 ORDER BY v.id_vendas desc";
-    console.log(sqlListaPedidosUsuario);
+  console.log(sqlListaPedidosUsuario);
   try {
     const result = await pg.execute(sqlListaPedidosUsuario, [id_usuario]);
 
@@ -206,12 +206,27 @@ exports.deletarVenda = async (req, res) => {
   console.log("---- DELETA VENDA ------");
   res.status(200).send(response);
 };
+exports.motivodaRejeicao = async (req, res) => {
+  let id_venda = req.params.id_venda;
+  
+  console.log("---- MOTIVO DA REJEICAO ------");
+  
+  let rs = await pg.execute(
+    "SELECT motivo_rejeicao FROM vendas WHERE id_vendas = $1",
+    [id_venda]
+  );
+  console.log(rs.rows[0].motivo_rejeicao);
 
+  var response = {
+    motivo: rs.rows[0].motivo_rejeicao,
+  };
+  res.status(200).send(response);
+};
 
 //------------ SALVA ANEXO -------------
 exports.salvarAnexosVendas = async (req, res) => {
-  console.log(req)
-  console.log("---------------- salvarAnexosVendas --------------------")
+  console.log(req);
+  console.log("---------------- salvarAnexosVendas --------------------");
   let id_venda = req.params.id_venda;
   let link_anexo = req.file.filename;
 
@@ -332,7 +347,7 @@ exports.getProdutosLancadosNasVendas = async (req, res) => {
 
 //--------------- RET PONTOS DA VENDA -----------
 exports.getPontosVendas = async (req, res) => {
-  console.log('*************** getPontosVendas ********************')
+  console.log("*************** getPontosVendas ********************");
   const id_usuario = req.params.id_usuario;
 
   try {

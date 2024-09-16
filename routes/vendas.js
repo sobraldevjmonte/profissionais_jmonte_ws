@@ -12,6 +12,7 @@ router.post("/anexararquivos/:id_venda", uploadComprovantes.single("comprovante"
 
 router.delete("/deletaranexo/:id_anexo", VendasController.deletarComprovante);
 router.delete("/deletarvenda/:id_venda", VendasController.deletarVenda);
+router.get("/motivo-da-rejeicao/:id_venda", VendasController.motivodaRejeicao);
 
 //------ retorna todos as cores -------------
 router.get("/:id_usuario", login.opcional, VendasController.getVendasDoUsuario);
